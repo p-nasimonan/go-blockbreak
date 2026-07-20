@@ -28,9 +28,9 @@ func (p player) MinX() float64 { return p.x }
 func (p player) MaxX() float64 { return p.x + p.width }
 func (p player) MinY() float64 { return p.y }
 func (p player) MaxY() float64 { return p.y + p.height }
-func (b ball) MinX() float64   { return b.x }
+func (b ball) MinX() float64   { return b.x - b.r }
 func (b ball) MaxX() float64   { return b.x + b.r }
-func (b ball) MinY() float64   { return b.y }
+func (b ball) MinY() float64   { return b.y - b.r }
 func (b ball) MaxY() float64   { return b.y + b.r }
 
 func (p *player) Control() {
@@ -123,7 +123,7 @@ func (b *ball) Update(p *player) {
 	b.y += b.vy
 	if b.MinX() < 0 {
 		b.vx = -b.vx
-		b.x = 0
+		b.x = b.r
 	}
 	if b.MaxX() > screenWidth {
 		b.vx = -b.vx
@@ -131,7 +131,7 @@ func (b *ball) Update(p *player) {
 	}
 	if b.MinY() < 0 {
 		b.vy = -b.vy
-		b.y = 0
+		b.y = b.r
 	}
 	if b.MaxY() > screenHeight {
 		b.vy = -b.vy
